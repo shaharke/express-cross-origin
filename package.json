@@ -1,0 +1,28 @@
+{
+  "name": "express-cross-origin",
+  "version": "0.1.0",
+  "description": "Express middleware for enabling cross domain calls",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha /test/*"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/shaharke/express-cross-domain.git"
+  },
+  "keywords": [
+    "express",
+    "cross",
+    "domain",
+    "middleware"
+  ],
+  "author": "Shahar Kedar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/shaharke/express-cross-domain/issues"
+  },
+  "homepage": "https://github.com/shaharke/express-cross-domain",
+  "peerDependencies": {
+    "express": "3.x"
+  }
+}
