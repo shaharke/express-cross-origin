@@ -1,27 +1,29 @@
 {
   "name": "express-cross-origin",
   "version": "0.1.0",
-  "description": "Express middleware for enabling cross domain calls",
+  "description": "Express middleware for enabling cross origin access control",
   "main": "index.js",
   "scripts": {
     "test": "mocha /test/*"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/shaharke/express-cross-domain.git"
+    "url": "git://github.com/shaharke/express-cross-origin.git"
   },
   "keywords": [
     "express",
     "cross",
     "domain",
-    "middleware"
+    "middleware",
+    "origin",
+    "cors"
   ],
   "author": "Shahar Kedar",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/shaharke/express-cross-domain/issues"
+    "url": "https://github.com/shaharke/express-cross-origin/issues"
   },
-  "homepage": "https://github.com/shaharke/express-cross-domain",
+  "homepage": "https://github.com/shaharke/express-cross-origin",
   "peerDependencies": {
     "express": "3.x"
   }
