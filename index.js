@@ -1,16 +1,19 @@
 function addCORS(res, origin, options) {
   res.header('Access-Control-Allow-Origin', origin);
-  res.header('Access-Control-Allow-Methods', options.methods);
-  res.header('Access-Control-Allow-Headers', options.headers);
-  res.header('Access-Control-Allow-Credentials', options.cerdentials);
+  res.header('Access-Control-Allow-Methods', options.methods.join(','));
+  res.header('Access-Control-Allow-Headers', options.headers.join(','));
+
+  if (options.cerdentials) {
+    res.header('Access-Control-Allow-Credentials', 'true');
+  }
+
 }
 
 module.exports = function(options) {
-
   var logger = options.logger;
-  options.methods = options.methods || 'GET,PUT,POST,DELETE,PATCH';
-  options.headers = options.headers || 'authorization, Origin, X-Requested-With, Content-Type, Accept';
-  options.cerdentials = options.cerdentials || 'true';
+  options.methods = options.methods || ['GET','PUT','POST','DELETE','PATCH'];
+  options.headers = options.headers || ['authorization', 'Origin', 'X-Requested-With', 'Content-Type', 'Accept'];
+  options.cerdentials = options.cerdentials || true;
 
   (function checkOrigin() {
     if (typeof options.origin == 'string' && options.origin == '*') {
@@ -19,15 +22,13 @@ module.exports = function(options) {
   })()
 
   return function(req, res, next) {
-    var origin = null;
-
-    if (origin instanceof RegExp) {
-      var requestOrigin = req.headers.origin;
-      if (origin.test(requestOrigin)) {
-        addCORS(res, requestOrigin, options);
-      }
-    } else if (typeof origin == 'string') {
-      addCORS(res, origin, options);
+    var requestOrigin = req.headers.origin;
+    if (options.origin instanceof RegExp && options.origin.test(requestOrigin)) {
+      addCORS(res, requestOrigin, options);
+    } else if(options.origin instanceof Array && options.origin.indexOf(requestOrigin) > -1) {
+      addCORS(res, requestOrigin, options);
+    } else if (typeof options.origin == 'string') {
+      addCORS(res, options.origin, options);
     }
 
     if ('OPTIONS' == req.method) {
