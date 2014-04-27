@@ -25,6 +25,6 @@
   },
   "homepage": "https://github.com/shaharke/express-cross-origin",
   "peerDependencies": {
-    "express": "3.x"
+    "express": "3.x - 4.x"
   }
 }
