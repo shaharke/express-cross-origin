@@ -3,7 +3,7 @@ function addCORS(res, origin, options) {
   res.header('Access-Control-Allow-Methods', options.methods.join(','));
   res.header('Access-Control-Allow-Headers', options.headers.join(','));
 
-  if (options.cerdentials) {
+  if (options.credentials) {
     res.header('Access-Control-Allow-Credentials', 'true');
   }
 
@@ -13,13 +13,13 @@ module.exports = function(options) {
   var logger = options.logger;
   options.methods = options.methods || ['GET','PUT','POST','DELETE','PATCH'];
   options.headers = options.headers || ['authorization', 'Origin', 'X-Requested-With', 'Content-Type', 'Accept'];
-  options.cerdentials = options.cerdentials || true;
+  options.credentials = options.credentials || true;
 
   (function checkOrigin() {
-    if (typeof options.origin == 'string' && options.origin == '*') {
-      logger && logger.warn('Allowing access to all domains')
+    if (typeof options.origin == 'string' && options.origin == '*' && logger) {
+      logger.warn('Allowing access to all domains');
     }
-  })()
+  })();
 
   return function(req, res, next) {
     var requestOrigin = req.headers.origin;
@@ -37,6 +37,6 @@ module.exports = function(options) {
       next();
     }
 
-  }
+  };
 
-}
+};
