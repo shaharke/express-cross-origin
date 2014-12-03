@@ -13,6 +13,11 @@ module.exports = function(options) {
   var logger = options.logger;
   options.methods = options.methods || ['GET','PUT','POST','DELETE','PATCH'];
   options.headers = options.headers || ['authorization', 'Origin', 'X-Requested-With', 'Content-Type', 'Accept'];
+
+  if (options.cerdentials) {
+    logger && logger.warn('"cerdentials" was a typo in the original code. We will continue to support the typo form for a couple of versions, but you should really use the correct form.');
+    options.credentials = options.cerdentials
+  }
   options.credentials = options.credentials || true;
 
   (function checkOrigin() {
